@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>ApexGear Gaming – Anasayfa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #020617;
+      color: #e5e7eb;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* HEADER */
+    header {
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(15,23,42,0.95);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid #1f2937;
+      backdrop-filter: blur(12px);
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      gap: 16px;
+      font-size: 14px;
+    }
+
+    nav a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+
+    nav a:hover {
+      border-color: #4b5563;
+      background: #020617;
+    }
+
+    /* HERO SLIDER */
+    .hero {
+      max-width: 1200px;
+      margin: 18px auto 28px auto;
+      padding: 0 16px;
+    }
+
+    .slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.65);
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform 0.6s ease;
+    }
+
+    .slide {
+      min-width: 100%;
+      position: relative;
+    }
+
+    .slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15,23,42,0.9) 5%, rgba(15,23,42,0.1) 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px 26px;
+    }
+
+    .slide-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 0 4px 0;
+    }
+
+    .slide-text {
+      font-size: 14px;
+      color: #cbd5f5;
+      max-width: 420px;
+      margin-bottom: 10px;
+    }
+
+    .slide-cta-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      border: none;
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      background: #22c55e;
+      color: #022c22;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-outline {
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      background: rgba(15,23,42,0.8);
+      color: #e5e7eb;
+      font-size: 13px;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 10px;
+      right: 16px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(148,163,184,0.6);
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .dot.active {
+      background: #22c55e;
+      transform: scale(1.4);
+    }
+
+    /* SECTIONS */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto 30px auto;
+      padding: 0 16px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: #9ca3af;
+    }
+
+    /* HAZIR MODELLER */
+    .model-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .model-card {
+      background: radial-gradient(circle at top left, #1f2937 0, #020617 55%);
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border: 1px solid rgba(31,41,55,0.8);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+    }
+
+    .model-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.75);
+      border-color: #4ade80;
+    }
+
+    .model-image-wrap {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(148,163,184,0.3);
+      background: #020617;
+    }
+
+    .model-image-wrap img {
+      width: 100%;
+      display: block;
+    }
+
+    .model-name-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .model-name {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .model-tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      color: #e5e7eb;
+    }
+
+    .model-desc {
+      font-size: 13px;
+      color: #9ca3af;
+      margin: 2px 0 4px 0;
+    }
+
+    .model-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .model-price {
+      font-size: 14px;
+      font-weight: 600;
+      color: #4ade80;
+    }
+
+    .model-link {
+      font-size: 12px;
+      color: #a5b4fc;
+      text-decoration: underline;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* OYUN LOGOLARI */
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 14px;
+    }
+
+    .game-tile {
+      background: #020617;
+      border-radius: 16px;
+      padding: 10px;
+      border: 1px solid #1f2937;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    .game-tile:hover {
+      transform: translateY(-2px);
+      border-color: #22c55e;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.6);
+    }
+
+    .game-logo-wrap {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .game-logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .game-name {
+      font-size: 12px;
+      text-align: center;
+    }
+
+    footer {
+      max-width: 1200px;
+      margin: 20px auto 30px auto;
+      padding: 0 16px;
+      font-size: 11px;
+      color: #6b7280;
+      border-top: 1px solid #111827;
+      padding-top: 12px;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 10px 12px;
+      }
+      .slide-title {
+        font-size: 18px;
+      }
+      .slide-text {
+        font-size: 13px;
+      }
+      .btn-primary {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ÜST MENÜ -->
+  <header>
+    <div class="logo-text">ApexGear Gaming</div>
+    <nav>
+      <a href="#hazir-modeller">Hazır Modeller</a>
+      <a href="#oyun-logolari">Oyunlara Göre</a>
+      <a href="#iletisim">İletişim</a>
+    </nav>
+  </header>
+
+  <!-- HERO SLIDER -->
+  <section class="hero">
+    <div class="slider" id="mainSlider">
+      <div class="slider-track">
+        <!-- SLIDE 1 -->
+        <div class="slide">
+          <!-- 1920x800 civarı bir banner: slider1.jpg -->
+          <img src="https://i.postimg.cc/50R8qVYy/kapak-slider-1.png" alt="Custom Controller Banner 1" />
+          <div class="slide-overlay">
+            <h2 class="slide-title">Custom Controller Atölyesi</h2>
+            <p class="slide-text">
+              KS13PRO TMR joystick, Mouse Click tetikleyiciler ve makro destekli back button çözümleri.
+              Hazır modeller veya tamamen sana özel tasarım.
+            </p>
+            <div class="slide-cta-row">
+              <button class="btn-primary" onclick="document.getElementById('hazir-modeller').scrollIntoView({behavior:'smooth'})">
+                Hazır Modelleri Gör 🎮
+              </button>
+              <button class="btn-outline" onclick="window.open('https://wa.me/905457352897','_blank')">
+                WhatsApp ile Hızlı İletişim
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="slide">
+          <img src="slider2.jpg" alt="Custom Controller Banner 2" />
+          <div class="slide-overlay">
+            <h2 class="slide-title">Competitive FPS Odaklı</h2>
+            <p class="slide-text">
+              Call of Duty, Rainbow Six Siege, Battlefield gibi oyunlar için düşük avg hatalı
+              hassas aim kalibrasyonu ile hazırlanmış preset modeller.
+            </p>
+            <div class="slide-cta-row">
+              <button class="btn-primary" onclick="document.getElementById('oyun-logolari').scrollIntoView({behavior:'smooth'})">
+                Oyunlara Göre Ayar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="slide">
+          <img src="slider3.jpg" alt="Custom Controller Banner 3" />
+          <div class="slide-overlay">
+            <h2 class="slide-title">BizimPS / ApexGear Gaming</h2>
+            <p class="slide-text">
+              Servis, modifiye ve profesyonel oyuncu setup’ları. Kolu sen getir veya bizden temin edelim – aynı atölyede elden geçsin.
+            </p>
+            <div class="slide-cta-row">
+              <button class="btn-primary" onclick="window.location.href='katalog.html'">
+                Tüm Kataloğu Aç
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slider-dots">
+        <div class="dot active" data-index="0"></div>
+        <div class="dot" data-index="1"></div>
+        <div class="dot" data-index="2"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HAZIR MODELLER -->
+  <section class="section" id="hazir-modeller">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Hazır Modeller</div>
+        <div class="section-sub">Kutu içeriği ve varyantları belirlenmiş, direkt satın alınabilir controller’lar.</div>
+      </div>
+    </div>
+
+    <div class="model-grid">
+      <!-- SILVER -->
+      <a href="controller-silver.html" class="model-card">
+        <div class="model-image-wrap">
+          <!-- controller_silver.jpg -->
+          <img src="https://i.postimg.cc/PJXZ5dV2/Savas_kunduzu_smd_clik01.jpg" alt="Controller Silver" />
+        </div>
+        <div class="model-name-row">
+          <div class="model-name">Controller Silver</div>
+          <div class="model-tag">Entry FPS</div>
+        </div>
+        <div class="model-desc">
+          FPS Hall joystick, basic back button opsiyonlu, giriş seviyesi rekabetçi oyuncular için dengeli paket.
+        </div>
+        <div class="model-footer">
+          <div class="model-price">Örn: 4.500 TL’den</div>
+          <div class="model-link">Detay / Varyant Seç</div>
+        </div>
+      </a>
+
+      <!-- GOLD -->
+      <a href="controller-gold.html" class="model-card">
+        <div class="model-image-wrap">
+          <!-- controller_gold.jpg -->
+          <img src="https://i.postimg.cc/yYH3xTCF/Dualsense_Controller_Beyaz1.jpg" alt="Controller Gold" />
+        </div>
+        <div class="model-name-row">
+          <div class="model-name">Controller Gold</div>
+          <div class="model-tag">Pro FPS</div>
+        </div>
+        <div class="model-desc">
+          KS13PRO TMR joystick, Mouse Click tetikleyiciler ve geliştirilmiş back button sistemi ile daha agresif oyun tarzı.
+        </div>
+        <div class="model-footer">
+          <div class="model-price">Örn: 6.500 TL’den</div>
+          <div class="model-link">Detay / Varyant Seç</div>
+        </div>
+      </a>
+
+      <!-- PLATINUM -->
+      <a href="controller-platinum.html" class="model-card">
+        <div class="model-image-wrap">
+          <!-- controller_platinum.jpg -->
+          <img src="https://i.postimg.cc/hGd5WdvV/Dualsense_Controller_Beyaz.jpg" alt="Controller Platinum" />
+        </div>
+        <div class="model-name-row">
+          <div class="model-name">Controller Platinum</div>
+          <div class="model-tag">Elite Setup</div>
+        </div>
+        <div class="model-desc">
+          Full makro destekli back button, KS13PRO TMR, hafifletilmiş gövde ve turnuva odaklı ince ayarlı tetik travel’ları.
+        </div>
+        <div class="model-footer">
+          <div class="model-price">Örn: 8.500 TL’den</div>
+          <div class="model-link">Detay / Varyant Seç</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- OYUN LOGOLARI -->
+  <section class="section" id="oyun-logolari">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Oyunlara Göre Preset / Tavsiye</div>
+        <div class="section-sub">Sık gelen oyunlar için hazır öneri profilleri – detay sayfalarına bağlayabilirsin.</div>
+      </div>
+    </div>
+
+    <div class="game-grid">
+      <!-- PUBG -->
+      <div class="game-tile" onclick="alert('PUBG için özel ayar sayfasına yönlendirebilirsin (pubg.html)')">
+        <div class="game-logo-wrap">
+          <!-- logo_pubg.png  (kare format önerilir) -->
+          <img src="https://i.postimg.cc/Pf1qMH8B/pubg_icon.png" alt="PUBG" />
+        </div>
+        <div class="game-name">PUBG</div>
+      </div>
+
+      <!-- CALL OF DUTY -->
+      <div class="game-tile" onclick="alert('Call of Duty sayfasına yönlendirebilirsin (cod.html)')">
+        <div class="game-logo-wrap">
+          <!-- logo_cod.png -->
+          <img src="https://i.postimg.cc/jjGsz3qS/cod_black_ops_icon.png" alt="Call of Duty" />
+        </div>
+        <div class="game-name">Call of Duty</div>
+      </div>
+
+      <!-- RAINBOW SIX SIEGE -->
+      <div class="game-tile" onclick="alert('Rainbow Six Siege sayfası (r6.html) bağlanabilir')">
+        <div class="game-logo-wrap">
+          <!-- logo_r6.png -->
+          <img src="https://i.postimg.cc/SKXSYbhT/rainbow_six_icon.png" alt="Rainbow Six Siege" />
+        </div>
+        <div class="game-name">Rainbow Six Siege</div>
+      </div>
+
+      <!-- İstersen ileride Battlefield, Apex Legends, Valorant vs. ekleyebilirsin -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="iletisim">
+    BizimPS / ApexGear Gaming – Custom Controller & FPS Setup Atölyesi<br />
+    WhatsApp: 0 (545) 735 28 97 · Instagram / YouTube: @BizimPS @ApexGearGaming<br />
+    Bu sayfa örnek bir anasayfa tasarımıdır; fiyatlar temsili yazılmıştır.
+  </footer>
+
+  <script>
+    // Basit otomatik slider
+    const slider = document.getElementById("mainSlider");
+    const track = slider.querySelector(".slider-track");
+    const slides = slider.querySelectorAll(".slide");
+    const dots = slider.querySelectorAll(".dot");
+    let currentIndex = 0;
+    const total = slides.length;
+    let sliderTimer = null;
+
+    function goToSlide(index) {
+      currentIndex = index;
+      if (currentIndex < 0) currentIndex = total - 1;
+      if (currentIndex >= total) currentIndex = 0;
+      track.style.transform = "translateX(-" + currentIndex * 100 + "%)";
+
+      dots.forEach(d => d.classList.remove("active"));
+      const activeDot = slider.querySelector('.dot[data-index="' + currentIndex + '"]');
+      if (activeDot) activeDot.classList.add("active");
+    }
+
+    function startSlider() {
+      stopSlider();
+      sliderTimer = setInterval(() => {
+        goToSlide(currentIndex + 1);
+      }, 5000);
+    }
+
+    function stopSlider() {
+      if (sliderTimer) clearInterval(sliderTimer);
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener("click", () => {
+        const index = Number(dot.dataset.index || 0);
+        goToSlide(index);
+        startSlider();
+      });
+    });
+
+    slider.addEventListener("mouseenter", stopSlider);
+    slider.addEventListener("mouseleave", startSlider);
+
+    // Initialize
+    goToSlide(0);
+    startSlider();
+  </script>
+</body>
+</html>
