@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <title>ApexGear Gaming – Anasayfa</title>
+  <title>ApexGear Gaming - Resimli Varyantlı Katalog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * {
@@ -12,585 +12,688 @@
 
     body {
       margin: 0;
+      padding: 20px;
       background: #020617;
       color: #e5e7eb;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    h1 {
+      text-align: center;
+      margin-bottom: 8px;
     }
 
-    /* HEADER */
-    header {
-      padding: 12px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(15,23,42,0.95);
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      border-bottom: 1px solid #1f2937;
-      backdrop-filter: blur(12px);
-    }
-
-    .logo-text {
-      font-weight: 700;
-      font-size: 18px;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-    }
-
-    nav {
-      display: flex;
-      gap: 16px;
+    .subtitle {
+      text-align: center;
       font-size: 14px;
+      color: #9ca3af;
+      margin-bottom: 24px;
     }
 
-    nav a {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-    }
-
-    nav a:hover {
-      border-color: #4b5563;
-      background: #020617;
-    }
-
-    /* HERO SLIDER */
-    .hero {
+    .product-list {
       max-width: 1200px;
-      margin: 18px auto 28px auto;
-      padding: 0 16px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 22px;
     }
 
-    .slider {
-      position: relative;
-      overflow: hidden;
-      border-radius: 24px;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.65);
+    .product-card {
+      background: radial-gradient(circle at top left, #1d2440 0, #020617 55%);
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+      display: grid;
+      grid-template-columns: 1.1fr 1.2fr;
+      gap: 16px;
     }
 
-    .slider-track {
+    @media (max-width: 800px) {
+      .product-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .product-media {
       display: flex;
-      transition: transform 0.6s ease;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .slide {
-      min-width: 100%;
+    .product-main-image {
       position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #020617;
+      border: 1px solid rgba(148,163,184,0.2);
     }
 
-    .slide img {
+    .product-main-image img {
       width: 100%;
-      height: auto;
       display: block;
     }
 
-    .slide-overlay {
+    .product-brand-tag {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(15,23,42,0.9) 5%, rgba(15,23,42,0.1) 60%);
+      left: 10px;
+      top: 10px;
+      padding: 4px 10px;
+      font-size: 11px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.92);
+      border: 1px solid rgba(148,163,184,0.5);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .product-info {
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 24px 26px;
-    }
-
-    .slide-title {
-      font-size: 24px;
-      font-weight: 700;
-      margin: 0 0 4px 0;
-    }
-
-    .slide-text {
-      font-size: 14px;
-      color: #cbd5f5;
-      max-width: 420px;
-      margin-bottom: 10px;
-    }
-
-    .slide-cta-row {
-      display: flex;
       gap: 10px;
-      flex-wrap: wrap;
     }
 
-    .btn-primary {
+    .product-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .product-desc {
+      font-size: 14px;
+      color: #9ca3af;
+      margin: 0;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.8);
+      border: 1px solid #1f2937;
+      color: #9ca3af;
+    }
+
+    .variants {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .variant-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .variant-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .variant-label-row span {
+      font-size: 13px;
+      color: #cbd5f5;
+    }
+
+    .variant-label-row small {
+      font-size: 11px;
+      color: #6b7280;
+    }
+
+    .variant-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .variant-option {
+      border-radius: 12px;
+      border: 1px solid #1f2937;
+      background: rgba(15,23,42,0.9);
+      padding: 4px;
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      min-width: 90px;
+      transition: transform 0.08s ease, box-shadow 0.08s ease, border-color 0.08s ease, background 0.08s ease;
+    }
+
+    .variant-option img {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #cbd5f5; //varyant resimlerini arkafonu)
+    }
+
+    .variant-option-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .variant-option-title {
+      font-size: 11px;
+      font-weight: 600;
+	  color: #ffffff;
+    }
+
+    .variant-option-price {
+      font-size: 10px;
+      color: #cbd5f5;
+    }
+
+    .variant-option.active {
+      border-color: #22c55e;
+      background: rgba(22,163,74,0.08);
+      box-shadow: 0 0 0 1px rgba(34,197,94,0.6);
+      transform: translateY(-1px);
+    }
+
+    .variant-option:hover {
+      border-color: #4ade80;
+    }
+
+    .bottom-row {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .price-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .price-label {
+      font-size: 13px;
+      color: #9ca3af;
+    }
+
+    .price-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #4ade80;
+    }
+
+    .note {
+      font-size: 11px;
+      color: #6b7280;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .wa-button {
+      flex: 1;
+      min-width: 160px;
       border: none;
       border-radius: 999px;
-      padding: 9px 16px;
+      padding: 10px 14px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       background: #22c55e;
       color: #022c22;
       display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .btn-outline {
-      border-radius: 999px;
-      border: 1px solid #4b5563;
-      background: rgba(15,23,42,0.8);
-      color: #e5e7eb;
-      font-size: 13px;
-      padding: 8px 14px;
-      cursor: pointer;
-    }
-
-    .slider-dots {
-      position: absolute;
-      bottom: 10px;
-      right: 16px;
-      display: flex;
-      gap: 6px;
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(148,163,184,0.6);
-      cursor: pointer;
-      transition: transform 0.15s ease, background 0.15s ease;
-    }
-
-    .dot.active {
-      background: #22c55e;
-      transform: scale(1.4);
-    }
-
-    /* SECTIONS */
-    .section {
-      max-width: 1200px;
-      margin: 0 auto 30px auto;
-      padding: 0 16px;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .section-title {
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    .section-sub {
-      font-size: 13px;
-      color: #9ca3af;
-    }
-
-    /* HAZIR MODELLER */
-    .model-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
-    }
-
-    .model-card {
-      background: radial-gradient(circle at top left, #1f2937 0, #020617 55%);
-      border-radius: 18px;
-      padding: 14px;
-      box-shadow: 0 14px 40px rgba(0,0,0,0.6);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      border: 1px solid rgba(31,41,55,0.8);
-      transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
-    }
-
-    .model-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 24px 50px rgba(0,0,0,0.75);
-      border-color: #4ade80;
-    }
-
-    .model-image-wrap {
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid rgba(148,163,184,0.3);
-      background: #020617;
-    }
-
-    .model-image-wrap img {
-      width: 100%;
-      display: block;
-    }
-
-    .model-name-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .model-name {
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .model-tag {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.6);
-      color: #e5e7eb;
-    }
-
-    .model-desc {
-      font-size: 13px;
-      color: #9ca3af;
-      margin: 2px 0 4px 0;
-    }
-
-    .model-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      margin-top: 4px;
-    }
-
-    .model-price {
-      font-size: 14px;
-      font-weight: 600;
-      color: #4ade80;
-    }
-
-    .model-link {
-      font-size: 12px;
-      color: #a5b4fc;
-      text-decoration: underline;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    /* OYUN LOGOLARI */
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-      gap: 14px;
-    }
-
-    .game-tile {
-      background: #020617;
-      border-radius: 16px;
-      padding: 10px;
-      border: 1px solid #1f2937;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
-    }
-
-    .game-tile:hover {
-      transform: translateY(-2px);
-      border-color: #22c55e;
-      box-shadow: 0 14px 30px rgba(0,0,0,0.6);
-    }
-
-    .game-logo-wrap {
-      width: 80px;
-      height: 80px;
-      border-radius: 16px;
-      overflow: hidden;
-      background: #020617;
-      display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease;
     }
 
-    .game-logo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    .wa-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(34,197,94,0.35);
+      opacity: 0.97;
     }
 
-    .game-name {
+    .wa-button:active {
+      transform: translateY(0);
+      box-shadow: none;
+      opacity: 0.9;
+    }
+
+    .ghost-button {
+      border-radius: 999px;
+      border: 1px solid #374151;
+      background: transparent;
+      color: #9ca3af;
       font-size: 12px;
-      text-align: center;
+      padding: 8px 12px;
+      cursor: pointer;
     }
 
-    footer {
-      max-width: 1200px;
-      margin: 20px auto 30px auto;
-      padding: 0 16px;
-      font-size: 11px;
-      color: #6b7280;
-      border-top: 1px solid #111827;
-      padding-top: 12px;
+    .ghost-button:hover {
+      border-color: #6b7280;
+      color: #e5e7eb;
     }
 
-    @media (max-width: 640px) {
-      header {
-        padding: 10px 12px;
-      }
-      .slide-title {
-        font-size: 18px;
-      }
-      .slide-text {
-        font-size: 13px;
-      }
-      .btn-primary {
-        font-size: 13px;
-      }
+    .wa-icon {
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
+  <h1>ApexGear Gaming – Resimli Varyantlı Custom Controller Kataloğu</h1>
+  <p class="subtitle">
+    Varyantları görselden seç → fiyat otomatik hesaplansın → tek tıkla WhatsApp’tan teklif iste 🎮
+  </p>
 
-  <!-- ÜST MENÜ -->
-  <header>
-    <div class="logo-text">ApexGear Gaming</div>
-    <nav>
-      <a href="#hazir-modeller">Hazır Modeller</a>
-      <a href="#oyun-logolari">Oyunlara Göre</a>
-      <a href="#iletisim">İletişim</a>
-    </nav>
-  </header>
+  <div class="product-list">
+    <!-- ÜRÜN #1 -->
+    <div class="product-card" data-base-price="0">
+      <div class="product-media">
+        <!-- Ana görsel (isteğe göre varyanta göre değiştirilebilir) -->
+        <div class="product-main-image" data-main-image>
+          <!-- controller_base.jpg: stok ürün görselin -->
+          <img src="https://i.postimg.cc/hGNcT4ZT/Dualsense-Controller-Beyaz1-(1).jpg" alt="Bizim Custom Controller" />
+          <div class="product-brand-tag">ApexGear Gaming</div>
+        </div>
+      </div>
 
-  <!-- HERO SLIDER -->
-  <section class="hero">
-    <div class="slider" id="mainSlider">
-      <div class="slider-track">
-        <!-- SLIDE 1 -->
-        <div class="slide">
-          <!-- 1920x800 civarı bir banner: slider1.jpg -->
-          <img src="https://i.postimg.cc/50R8qVYy/kapak-slider-1.png" alt="Custom Controller Banner 1" />
-          <div class="slide-overlay">
-            <h2 class="slide-title">Custom Controller Atölyesi</h2>
-            <p class="slide-text">
-              KS13PRO TMR joystick, Mouse Click tetikleyiciler ve makro destekli back button çözümleri.
-              Hazır modeller veya tamamen sana özel tasarım.
-            </p>
-            <div class="slide-cta-row">
-              <button class="btn-primary" onclick="document.getElementById('hazir-modeller').scrollIntoView({behavior:'smooth'})">
-                Hazır Modelleri Gör 🎮
+      <div class="product-info">
+        <h2 class="product-title">Bizim Custom Controller Savaş Kunduzu Varyant</h2>
+        <p class="product-desc">
+          Oyunu Kolunuzun Seçimini Yapın, Size Ait oyun kollarına da işlem yapmak mümkün.
+        </p>
+
+        <div class="badge-row">
+          <span class="badge">DualSense Tabanlı</span>
+          <span class="badge">KS13PRO TMR /Gulikit TMR</span>
+          <span class="badge">Makro Destekli Arka Tuş</span>
+        </div>
+        <div class="variants">
+          <!-- VARYANT GRUP: BACK BUTTON -->
+          <div class="variant-group" data-group="Back Button">
+            <div class="variant-label-row">
+              <span>Oyun Kolu Seçimini Yapın</span>
+              <small>Oyun Kolu Seçimi</small>
+            </div>
+            <div class="variant-options">
+              <!-- ÖRNEK GÖRSELLER: back_none.jpg, back_kaucukv2.jpg, back_savaskunduzu.jpg -->
+             <button class="variant-option"
+                data-label="Back Button"
+                data-value="Stok Kalsın"
+                data-price="0"
+                data-image-target="main"
+                data-image-src="https://i.postimg.cc/NjJPGmt0/Oyun-kolu-secimi.png">
+                <img src="https://i.postimg.cc/NjJPGmt0/Oyun-kolu-secimi.png" alt="Savaş Kunduzu v4" />
+                <div class="variant-option-text">
+                  <span class="variant-option-title">Kendi Gamepad’imi Gönderiyorum</span>
+                  <span class="variant-option-price">+0 TL</span>
+                </div>
               </button>
-              <button class="btn-outline" onclick="window.open('https://wa.me/905457352897','_blank')">
-                WhatsApp ile Hızlı İletişim
+			 <button class="variant-option active"
+                data-label="Outlet Dualsense"
+                data-value="Outlet Dualsense"
+                data-price="2600"
+                data-image-target="main"
+                data-image-src="https://i.postimg.cc/j5hh1Lzv/dualsense-sade.jpg">
+                <img src="https://i.postimg.cc/j5hh1Lzv/dualsense-sade.jpg" alt="Back Button Yok" />
+                <div class="variant-option-text">
+                  <span class="variant-option-title">Outlet Dualsense Ekle</span>
+                  <span class="variant-option-price">+2600 TL</span>
+                </div>
+              </button
+			  
+            </div>
+			<button class="variant-option active"
+                data-label="Sıfır Dualsense"
+                data-value="Sıfır Dualsense"
+                data-price="3500"
+                data-image-target="main"
+                data-image-src="https://i.postimg.cc/j5hh1Lzv/dualsense-sade.jpg">
+                <img src="https://i.postimg.cc/j5hh1Lzv/dualsense-sade.jpg" alt="Back Button Yok" />
+                <div class="variant-option-text">
+                  <span class="variant-option-title">Sıfır Dualsense Ekle</span>
+                  <span class="variant-option-price">+3500 TL</span>
+                </div>
+              </button>
+			  
+            </div>
+          </div>
+        <div class="variants">
+          <!-- VARYANT GRUP: BACK BUTTON -->
+          <div class="variant-group" data-group="Back Button">
+            <div class="variant-label-row">
+              <span>Back Button Modelini Belirle</span>
+              <small>Arka Back Button Sistemi</small>
+            </div>
+            <div class="variant-options">
+              <!-- ÖRNEK GÖRSELLER: back_none.jpg, back_kaucukv2.jpg, back_savaskunduzu.jpg -->
+             <button class="variant-option"
+                data-label="Back Button"
+                data-value="Stok Kalsın"
+                data-price="0"
+                data-image-target="main"
+                data-image-src="https://i.postimg.cc/KvNwFsmZ/savas-kunduzu-stok.jpg">
+                <img src="https://i.postimg.cc/KvNwFsmZ/savas-kunduzu-stok.jpg" alt="Savaş Kunduzu v4" />
+                <div class="variant-option-text">
+                  <span class="variant-option-title">Stok Kalsın</span>
+                  <span class="variant-option-price">+0 TL</span>
+                </div>
+              </button>
+			 <button class="variant-option active"
+                data-label="Back Button"
+                data-value="Savaş Kunduzu V2"
+                data-price="2000"
+                data-image-target="main"
+                data-image-src="https://i.postimg.cc/RZxDmLzC/Savas-kunduzu-v2.png">
+                <img src="https://i.postimg.cc/RZxDmLzC/Savas-kunduzu-v2.png" alt="Back Button Yok" />
+                <div class="variant-option-text">
+                  <span class="variant-option-title">Savaş Kunduzu V2</span>
+                  <span class="variant-option-price">+2000 TL</span>
+                </div>
+              </button>
+
+              <button class="variant-option"
+                data-label="Back Button"
+                data-value="Savaş Kunduzu V4"
+                data-price="2500"
+                data-image-target="main"
+                data-image-src="https://i.postimg.cc/gkVKV9f9/savas-kunduzu-v4.jpg">
+                <img src="https://i.postimg.cc/gkVKV9f9/savas-kunduzu-v4.jpg" alt="Kauçuk V2 Plus" />
+                <div class="variant-option-text">
+                  <span class="variant-option-title">Savaş Kunduzu V4</span>
+                  <span class="variant-option-price">+2500 TL</span>
+                </div>
+              </button>
+            </div>
+          </div>
+		  
+
+          <!-- JOYSTICK MOTOR -->
+<div class="variant-group" data-group="Joystick Motor">
+  <div class="variant-label-row">
+    <span>SOL Joystick Modülü Belirle</span>
+    <small>Sol modüller</small>
+  </div>
+  <div class="variant-options">
+    <button class="variant-option active"
+      data-label="Joystick Motor"
+      data-value="Stok Joystick"
+      data-price="0">
+      <img src="https://i.postimg.cc/7hJ8bP6K/joystick_alps_joystick.png" alt="Stok Joystick" />
+      <div class="variant-option-text">
+        <span class="variant-option-title">Stok Joystick</span>
+        <span class="variant-option-price">+0 TL</span>
+      </div>
+    </button>
+
+    <button class="variant-option"
+      data-label="Joystick Motor"
+      data-value="KS13PRO TMR"
+      data-price="1150">
+      <img src="https://i.postimg.cc/NF2qLGMV/joystick_ks13pro.png" alt="TMR Joystick" />
+      <div class="variant-option-text">
+        <span class="variant-option-title">KS13PRO TMR</span>
+        <span class="variant-option-price">+1.150 TL</span>
+      </div>
+    </button>
+
+    <button class="variant-option"
+      data-label="Joystick Motor"
+      data-value="Gulikit TMR"
+      data-price="1300">
+      <img src="https://i.postimg.cc/MHf2XZTt/joystick_gulikit_TMR.png" alt="Gulikit TMR" />
+      <div class="variant-option-text">
+        <span class="variant-option-title">Gulikit TMR</span>
+        <span class="variant-option-price">+1.300 TL</span>
+      </div>
+    </button>
+  </div>
+</div>
+<!-- JOYSTICK MOTOR -->
+<div class="variant-group" data-group="Joystick Motor">
+  <div class="variant-label-row">
+    <span>SAĞ Joystick Modülü Belirle</span>
+    <small>Sağ modüller</small>
+  </div>
+  <div class="variant-options">
+    <button class="variant-option active"
+      data-label="Joystick Motor"
+      data-value="Stok Joystick"
+      data-price="0">
+      <img src="https://i.postimg.cc/7hJ8bP6K/joystick_alps_joystick.png" alt="Stok Joystick" />
+      <div class="variant-option-text">
+        <span class="variant-option-title">Stok Joystick</span>
+        <span class="variant-option-price">+0 TL</span>
+      </div>
+    </button>
+
+    <button class="variant-option"
+      data-label="Joystick Motor"
+      data-value="KS13PRO TMR"
+      data-price="1150">
+      <img src="https://i.postimg.cc/NF2qLGMV/joystick_ks13pro.png" alt="TMR Joystick" />
+      <div class="variant-option-text">
+        <span class="variant-option-title">KS13PRO TMR</span>
+        <span class="variant-option-price">+1.150 TL</span>
+      </div>
+    </button>
+
+    <button class="variant-option"
+      data-label="Joystick Motor"
+      data-value="Gulikit TMR"
+      data-price="1300">
+      <img src="https://i.postimg.cc/MHf2XZTt/joystick_gulikit_TMR.png" alt="Gulikit TMR" />
+      <div class="variant-option-text">
+        <span class="variant-option-title">Gulikit TMR</span>
+        <span class="variant-option-price">+1.300 TL</span>
+      </div>
+    </button>
+  </div>
+</div>
+
+
+          <!-- VARYANT GRUP: TETİKLER -->
+          <div class="variant-group" data-group="Tetikleyici">
+            <div class="variant-label-row">
+              <span>Mouse Click Tetikleyiciler (Arka R1 R2 L1 L2)</span>
+              <small>FPS için hızlı tetik</small>
+            </div>
+            <div class="variant-options">
+              <!-- trigger_stock.jpg, trigger_mouseclick.jpg -->
+              <button class="variant-option active"
+                data-label="Tetikleyici Tipi"
+                data-value="Stok"
+                data-price="0">
+                <img src="https://i.postimg.cc/0ywR9y3s/Stok-tetik.png" alt="Stok tetikler" />
+                <div class="variant-option-text">
+                  <span class="variant-option-title">Silikon Stok Tetikler</span>
+                  <span class="variant-option-price">+0 TL</span>
+                </div>
+              </button>
+			  
+
+              <button class="variant-option"
+                data-label="Tetikleyici Tipi"
+                data-value="Mouse Click Omron 4.3.3"
+                data-price="1800">
+                <img src="https://i.postimg.cc/fTdDRknn/omron-clik.png" alt="Mouse Click" />
+                <div class="variant-option-text">
+                  <span class="variant-option-title">Omron Tetikleyici Gen:5</span>
+                  <span class="variant-option-price">+1.800 TL</span>
+                </div>
               </button>
             </div>
           </div>
         </div>
+<!-- VARYANT GRUP: D-PAD TETİKLER -->
+<div class="variant-group" data-group="D-PAD">
+  <div class="variant-label-row">
+    <span>D-PAD Mouse Click Tetikler (Ön Yüz Tuşları)</span>
+    <small>Ön Yüz Tuşları</small>
+  </div>
+  <div class="variant-options">
+    <button class="variant-option active"
+      data-label="D-PAD Tetikler"
+      data-value="Stok Silikon"
+      data-price="0">
+      <img src="https://i.postimg.cc/d0ym4L19/D_Pad_Ön_clik.png" alt="Stok tetikler" />
+      <div class="variant-option-text">
+        <span class="variant-option-title">Stok Silikon</span>
+        <span class="variant-option-price">+0 TL</span>
+      </div>
+    </button>
 
-        <!-- SLIDE 2 -->
-        <div class="slide">
-          <img src="slider2.jpg" alt="Custom Controller Banner 2" />
-          <div class="slide-overlay">
-            <h2 class="slide-title">Competitive FPS Odaklı</h2>
-            <p class="slide-text">
-              Call of Duty, Rainbow Six Siege, Battlefield gibi oyunlar için düşük avg hatalı
-              hassas aim kalibrasyonu ile hazırlanmış preset modeller.
-            </p>
-            <div class="slide-cta-row">
-              <button class="btn-primary" onclick="document.getElementById('oyun-logolari').scrollIntoView({behavior:'smooth'})">
-                Oyunlara Göre Ayar
-              </button>
-            </div>
+    <button class="variant-option"
+      data-label="D-PAD Tetikler"
+      data-value="D-PAD Mouse Click Tetikler"
+      data-price="1250">
+      <img src="https://i.postimg.cc/fTdDRknn/omron-clik.png" alt="Mouse Click" />
+      <div class="variant-option-text">
+        <span class="variant-option-title">D-PAD Mouse Click</span>
+        <span class="variant-option-price">+1.250 TL</span>
+      </div>
+    </button>
+  </div>
+</div>
+        <!-- Fiyat & Aksiyonlar -->
+        <div class="bottom-row">
+          <div class="price-line">
+            <span class="price-label">Toplam Fiyat</span>
+            <span class="price-value" data-price-display></span>
+          </div>
+          <div class="note">
+            Fiyatlar örnek olarak yazılmıştır. Net fiyat ve stok bilgisi için WhatsApp üzerinden iletişime geçin.
+          </div>
+          <div class="action-row">
+            <button class="wa-button">
+              <span class="wa-icon">💬</span> WhatsApp’tan Teklif Al
+            </button>
+            <button class="ghost-button">
+              PDF / Teklif çıktısı (yakında)
+            </button>
           </div>
         </div>
-
-        <!-- SLIDE 3 -->
-        <div class="slide">
-          <img src="slider3.jpg" alt="Custom Controller Banner 3" />
-          <div class="slide-overlay">
-            <h2 class="slide-title">BizimPS / ApexGear Gaming</h2>
-            <p class="slide-text">
-              Servis, modifiye ve profesyonel oyuncu setup’ları. Kolu sen getir veya bizden temin edelim – aynı atölyede elden geçsin.
-            </p>
-            <div class="slide-cta-row">
-              <button class="btn-primary" onclick="window.location.href='katalog.html'">
-                Tüm Kataloğu Aç
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="slider-dots">
-        <div class="dot active" data-index="0"></div>
-        <div class="dot" data-index="1"></div>
-        <div class="dot" data-index="2"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HAZIR MODELLER -->
-  <section class="section" id="hazir-modeller">
-    <div class="section-header">
-      <div>
-        <div class="section-title">Hazır Modeller</div>
-        <div class="section-sub">Kutu içeriği ve varyantları belirlenmiş, direkt satın alınabilir controller’lar.</div>
       </div>
     </div>
 
-    <div class="model-grid">
-      <!-- SILVER -->
-      <a href="controller-silver.html" class="model-card">
-        <div class="model-image-wrap">
-          <!-- controller_silver.jpg -->
-          <img src="https://i.postimg.cc/PJXZ5dV2/Savas_kunduzu_smd_clik01.jpg" alt="Controller Silver" />
-        </div>
-        <div class="model-name-row">
-          <div class="model-name">Controller Silver</div>
-          <div class="model-tag">Entry FPS</div>
-        </div>
-        <div class="model-desc">
-          FPS Hall joystick, basic back button opsiyonlu, giriş seviyesi rekabetçi oyuncular için dengeli paket.
-        </div>
-        <div class="model-footer">
-          <div class="model-price">Örn: 4.500 TL’den</div>
-          <div class="model-link">Detay / Varyant Seç</div>
-        </div>
-      </a>
+    <!-- İKİNCİ ÜRÜN vb. için yukarıdaki .product-card blokunu kopyalayıp içerikleri değiştirmen yeterli -->
 
-      <!-- GOLD -->
-      <a href="controller-gold.html" class="model-card">
-        <div class="model-image-wrap">
-          <!-- controller_gold.jpg -->
-          <img src="https://i.postimg.cc/yYH3xTCF/Dualsense_Controller_Beyaz1.jpg" alt="Controller Gold" />
-        </div>
-        <div class="model-name-row">
-          <div class="model-name">Controller Gold</div>
-          <div class="model-tag">Pro FPS</div>
-        </div>
-        <div class="model-desc">
-          KS13PRO TMR joystick, Mouse Click tetikleyiciler ve geliştirilmiş back button sistemi ile daha agresif oyun tarzı.
-        </div>
-        <div class="model-footer">
-          <div class="model-price">Örn: 6.500 TL’den</div>
-          <div class="model-link">Detay / Varyant Seç</div>
-        </div>
-      </a>
-
-      <!-- PLATINUM -->
-      <a href="controller-platinum.html" class="model-card">
-        <div class="model-image-wrap">
-          <!-- controller_platinum.jpg -->
-          <img src="https://i.postimg.cc/hGd5WdvV/Dualsense_Controller_Beyaz.jpg" alt="Controller Platinum" />
-        </div>
-        <div class="model-name-row">
-          <div class="model-name">Controller Platinum</div>
-          <div class="model-tag">Elite Setup</div>
-        </div>
-        <div class="model-desc">
-          Full makro destekli back button, KS13PRO TMR, hafifletilmiş gövde ve turnuva odaklı ince ayarlı tetik travel’ları.
-        </div>
-        <div class="model-footer">
-          <div class="model-price">Örn: 8.500 TL’den</div>
-          <div class="model-link">Detay / Varyant Seç</div>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- OYUN LOGOLARI -->
-  <section class="section" id="oyun-logolari">
-    <div class="section-header">
-      <div>
-        <div class="section-title">Oyunlara Göre Preset / Tavsiye</div>
-        <div class="section-sub">Sık gelen oyunlar için hazır öneri profilleri – detay sayfalarına bağlayabilirsin.</div>
-      </div>
-    </div>
-
-    <div class="game-grid">
-      <!-- PUBG -->
-      <div class="game-tile" onclick="alert('PUBG için özel ayar sayfasına yönlendirebilirsin (pubg.html)')">
-        <div class="game-logo-wrap">
-          <!-- logo_pubg.png  (kare format önerilir) -->
-          <img src="https://i.postimg.cc/Pf1qMH8B/pubg_icon.png" alt="PUBG" />
-        </div>
-        <div class="game-name">PUBG</div>
-      </div>
-
-      <!-- CALL OF DUTY -->
-      <div class="game-tile" onclick="alert('Call of Duty sayfasına yönlendirebilirsin (cod.html)')">
-        <div class="game-logo-wrap">
-          <!-- logo_cod.png -->
-          <img src="https://i.postimg.cc/jjGsz3qS/cod_black_ops_icon.png" alt="Call of Duty" />
-        </div>
-        <div class="game-name">Call of Duty</div>
-      </div>
-
-      <!-- RAINBOW SIX SIEGE -->
-      <div class="game-tile" onclick="alert('Rainbow Six Siege sayfası (r6.html) bağlanabilir')">
-        <div class="game-logo-wrap">
-          <!-- logo_r6.png -->
-          <img src="https://i.postimg.cc/SKXSYbhT/rainbow_six_icon.png" alt="Rainbow Six Siege" />
-        </div>
-        <div class="game-name">Rainbow Six Siege</div>
-      </div>
-
-      <!-- İstersen ileride Battlefield, Apex Legends, Valorant vs. ekleyebilirsin -->
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer id="iletisim">
-    BizimPS / ApexGear Gaming – Custom Controller & FPS Setup Atölyesi<br />
-    WhatsApp: 0 (545) 735 28 97 · Instagram / YouTube: @BizimPS @ApexGearGaming<br />
-    Bu sayfa örnek bir anasayfa tasarımıdır; fiyatlar temsili yazılmıştır.
-  </footer>
+  </div>
 
   <script>
-    // Basit otomatik slider
-    const slider = document.getElementById("mainSlider");
-    const track = slider.querySelector(".slider-track");
-    const slides = slider.querySelectorAll(".slide");
-    const dots = slider.querySelectorAll(".dot");
-    let currentIndex = 0;
-    const total = slides.length;
-    let sliderTimer = null;
+    // 🔢 WhatsApp numaranı buraya yaz (90 ile, boşluksuz)
+    const WHATSAPP_NUMBER = "905457352897";
 
-    function goToSlide(index) {
-      currentIndex = index;
-      if (currentIndex < 0) currentIndex = total - 1;
-      if (currentIndex >= total) currentIndex = 0;
-      track.style.transform = "translateX(-" + currentIndex * 100 + "%)";
-
-      dots.forEach(d => d.classList.remove("active"));
-      const activeDot = slider.querySelector('.dot[data-index="' + currentIndex + '"]');
-      if (activeDot) activeDot.classList.add("active");
+    function formatPrice(price) {
+      return price.toLocaleString("tr-TR", {
+        style: "currency",
+        currency: "TRY",
+        maximumFractionDigits: 0
+      });
     }
 
-    function startSlider() {
-      stopSlider();
-      sliderTimer = setInterval(() => {
-        goToSlide(currentIndex + 1);
-      }, 5000);
+    function updateCardPrice(card) {
+  const base = Number(card.dataset.basePrice) || 0; // ← buradan çekiyor
+  let extra = 0;
+
+  const activeOptions = card.querySelectorAll(".variant-option.active");
+  activeOptions.forEach(opt => {
+    extra += Number(opt.dataset.price || 0);
+  });
+
+  const total = base + extra;
+  card.dataset.totalPrice = total;
+
+  const display = card.querySelector("[data-price-display]");
+  if (display) {
+    display.textContent = formatPrice(total);
+  }
+}
+
+
+    function changeMainImageIfNeeded(card, option) {
+      const target = option.dataset.imageTarget;
+      const src = option.dataset.imageSrc;
+      if (!target || !src) return;
+
+      if (target === "main") {
+        const mainWrapper = card.querySelector("[data-main-image] img");
+        if (mainWrapper) {
+          mainWrapper.src = src;
+        }
+      }
+      // İstersek ileride farklı target alanları ekleyebiliriz (örn: sadece back button alanı)
     }
 
-    function stopSlider() {
-      if (sliderTimer) clearInterval(sliderTimer);
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+      const cards = document.querySelectorAll(".product-card");
 
-    dots.forEach(dot => {
-      dot.addEventListener("click", () => {
-        const index = Number(dot.dataset.index || 0);
-        goToSlide(index);
-        startSlider();
+      cards.forEach(card => {
+        // İlk fiyat hesapla
+        updateCardPrice(card);
+
+        // Varyant butonları
+        card.querySelectorAll(".variant-group").forEach(group => {
+          const options = group.querySelectorAll(".variant-option");
+          options.forEach(option => {
+            option.addEventListener("click", () => {
+              // Aynı grup içindeki diğerlerini pasif yap
+              options.forEach(o => o.classList.remove("active"));
+              option.classList.add("active");
+
+              // Gerekirse ana görseli değiştir
+              changeMainImageIfNeeded(card, option);
+
+              // Fiyatı güncelle
+              updateCardPrice(card);
+            });
+          });
+        });
+
+        // WhatsApp butonu
+        const waBtn = card.querySelector(".wa-button");
+        if (waBtn) {
+          waBtn.addEventListener("click", () => {
+            const titleEl = card.querySelector(".product-title");
+            const productName = titleEl ? titleEl.textContent.trim() : "Ürün";
+            const total = Number(card.dataset.totalPrice || 0);
+
+            const lines = [];
+            lines.push("Merhaba, şu ürün için fiyat / stok bilgisi almak istiyorum:");
+            lines.push(productName);
+            lines.push("");
+            lines.push("Seçtiğim varyantlar:");
+
+            const activeOptions = card.querySelectorAll(".variant-option.active");
+            activeOptions.forEach(opt => {
+              const label = opt.dataset.label || "Seçenek";
+              const value = opt.dataset.value || "";
+              lines.push("- " + label + ": " + value);
+            });
+
+            lines.push("");
+            lines.push("Sitede görünen toplam fiyat: " + formatPrice(total));
+
+            const message = encodeURIComponent(lines.join("\n"));
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+            window.open(url, "_blank");
+          });
+        }
       });
     });
-
-    slider.addEventListener("mouseenter", stopSlider);
-    slider.addEventListener("mouseleave", startSlider);
-
-    // Initialize
-    goToSlide(0);
-    startSlider();
   </script>
 </body>
 </html>
