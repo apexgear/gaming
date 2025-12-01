@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>ApexGear Gaming - Hibrit Varyantlı Katalog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #020617;
+      color: #e5e7eb;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 14px;
+      color: #9ca3af;
+      margin-bottom: 24px;
+    }
+
+    .product-list {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 22px;
+    }
+
+    .product-card {
+      background: radial-gradient(circle at top left, #1d2440 0, #020617 55%);
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+      display: grid;
+      grid-template-columns: 1.1fr 1.2fr;
+      gap: 16px;
+      border: 1px solid #111827;
+    }
+
+    @media (max-width: 800px) {
+      .product-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .product-media {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .product-main-image {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #020617;
+      border: 1px solid rgba(148,163,184,0.2);
+    }
+
+    .product-main-image img {
+      width: 100%;
+      display: block;
+    }
+
+    .product-brand-tag {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      padding: 4px 10px;
+      font-size: 11px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.92);
+      border: 1px solid rgba(148,163,184,0.5);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .product-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .product-desc {
+      font-size: 14px;
+      color: #9ca3af;
+      margin: 0;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.8);
+      border: 1px solid #1f2937;
+      color: #9ca3af;
+    }
+
+    .variants {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .variant-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .variant-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .variant-label-row span {
+      font-size: 13px;
+      color: #cbd5f5;
+    }
+
+    .variant-label-row small {
+      font-size: 11px;
+      color: #6b7280;
+    }
+
+    /* DROPDOWN TASARIMI */
+    .variant-select {
+      width: 100%;
+      padding: 6px 10px;
+      border-radius: 10px;
+      border: 1px solid #1f2937;
+      background: rgba(15,23,42,0.96);
+      color: #e5e7eb;
+      font-size: 13px;
+      outline: none;
+      cursor: pointer;
+      transition:
+        border-color 0.16s ease,
+        box-shadow 0.16s ease,
+        background 0.16s ease;
+    }
+
+    .variant-select:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 1px rgba(34,197,94,0.6);
+      background: rgba(15,23,42,1);
+    }
+
+    .variant-select option {
+      background: #020617;
+      color: #e5e7eb;
+    }
+
+    /* VARYANT DETAY ÖNİZLEME KARTI */
+    .variant-preview-card {
+      margin-top: 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(148,163,184,0.28);
+      background: radial-gradient(circle at top left, #020617 0, #020617 55%);
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .variant-preview-image-wrap {
+      width: 90px;
+      height: 90px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #020617;
+      border: 1px solid rgba(148,163,184,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .variant-preview-image-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+    }
+
+    .variant-preview-text-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #e5e7eb;
+    }
+
+    .variant-preview-text-desc {
+      font-size: 12px;
+      color: #9ca3af;
+      line-height: 1.4;
+    }
+
+    .variant-preview-label {
+      font-size: 11px;
+      color: #6b7280;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .bottom-row {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .price-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .price-label {
+      font-size: 13px;
+      color: #9ca3af;
+    }
+
+    .price-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #4ade80;
+    }
+
+    .summary-line {
+      font-size: 12px;
+      color: #e5e7eb;
+      padding: 6px 10px;
+      border-radius: 12px;
+      background: rgba(15,23,42,0.85);
+      border: 1px dashed #374151;
+      line-height: 1.4;
+    }
+
+    .summary-label {
+      font-weight: 600;
+      color: #9ca3af;
+    }
+
+    .note {
+      font-size: 11px;
+      color: #6b7280;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .wa-button {
+      flex: 1;
+      min-width: 160px;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      background: #22c55e;
+      color: #022c22;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease;
+    }
+
+    .wa-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(34,197,94,0.35);
+      opacity: 0.97;
+    }
+
+    .wa-button:active {
+      transform: translateY(0);
+      box-shadow: none;
+      opacity: 0.9;
+    }
+
+    .ghost-button {
+      border-radius: 999px;
+      border: 1px solid #374151;
+      background: transparent;
+      color: #9ca3af;
+      font-size: 12px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .ghost-button:hover {
+      border-color: #6b7280;
+      color: #e5e7eb;
+    }
+
+    .wa-icon {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>ApexGear Gaming – Hibrit Varyantlı Custom Controller Kataloğu</h1>
+  <p class="subtitle">
+    Dropdown ile varyantını seç → toplam fiyat otomatik hesaplansın → detaylı varyant önizlemesini gör → WhatsApp’tan teklif iste 🎮
+  </p>
+
+  <div class="product-list">
+    <!-- TEK ÜRÜN KARTI -->
+    <div class="product-card" data-base-price="0">
+      <div class="product-media">
+        <!-- Ana görsel -->
+        <div class="product-main-image" data-main-image>
+          <img src="https://i.postimg.cc/hGNcT4ZT/Dualsense-Controller-Beyaz1-(1).jpg" alt="Bizim Custom Controller" />
+          <div class="product-brand-tag">ApexGear Gaming</div>
+        </div>
+
+        <!-- Varyant detay önizleme -->
+        <div class="variant-preview-card">
+          <div class="variant-preview-image-wrap">
+            <img src="https://i.postimg.cc/NjJPGmt0/Oyun-kolu-secimi.png" alt="Varyant önizleme" data-variant-preview-image />
+          </div>
+          <div>
+            <div class="variant-preview-label">VARYANT DETAY ÖNİZLEME</div>
+            <div class="variant-preview-text-title" data-variant-preview-title>
+              Gamepad → Kendi gamepad’imi gönderiyorum
+            </div>
+            <div class="variant-preview-text-desc" data-variant-preview-desc>
+              Seçtiğiniz varyantın görsel ve açıklaması burada görüntülenecek. Yukarıdaki menülerden seçim yaptıkça bu alan otomatik güncellenecek.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-info">
+        <h2 class="product-title">Bizim Custom Controller – Savaş Kunduzu Yapılandırma</h2>
+        <p class="product-desc">
+          FPS odaklı, tamamen özelleştirilebilir PS5 custom kol. Gamepad kaynağını, back button modelini, joystick modüllerini ve tetikleri
+          kendi oyun stiline göre seç.
+        </p>
+
+        <div class="badge-row">
+          <span class="badge">DualSense Tabanlı</span>
+          <span class="badge">KS13PRO / Gulikit TMR</span>
+          <span class="badge">Makro Destekli Back Button</span>
+        </div>
+
+        <div class="variants">
+          <!-- 1) OYUN KOLU SEÇİMİ -->
+          <div class="variant-group">
+            <div class="variant-label-row">
+              <span>Oyun Kolu Seçimi</span>
+              <small>Kol sizden mi, bizden mi?</small>
+            </div>
+            <select class="variant-select"
+                    data-label="Gamepad"
+                    data-preview="true">
+              <option value="kendi"
+                      data-price="0"
+                      data-image-src="https://i.postimg.cc/NjJPGmt0/Oyun-kolu-secimi.png"
+                      data-desc="Kendi kullandığınız DualSense’i bize gönderiyorsunuz, sadece modifikasyon ücretleri eklenir.">
+                Kendi gamepad’imi gönderiyorum (+0 TL)
+              </option>
+              <option value="outlet"
+                      data-price="2600"
+                      data-image-src="https://i.postimg.cc/j5hh1Lzv/dualsense-sade.jpg"
+                      data-desc="Outlet durumunda, kozmetik olarak hafif kusurlu ama fonksiyonel DualSense bizden temin edilir.">
+                Outlet DualSense eklensin (+2.600 TL)
+              </option>
+              <option value="sifir"
+                      data-price="3500"
+                      data-image-src="https://i.postimg.cc/j5hh1Lzv/dualsense-sade.jpg"
+                      data-desc="Sıfır, kutulu DualSense bizden; üzerine seçtiğiniz tüm modlar uygulanır.">
+                Sıfır DualSense eklensin (+3.500 TL)
+              </option>
+            </select>
+          </div>
+
+          <!-- 2) BACK BUTTON MODELİ -->
+          <div class="variant-group">
+            <div class="variant-label-row">
+              <span>Back Button Modeli</span>
+              <small>Arka makro sistemi</small>
+            </div>
+            <select class="variant-select"
+                    data-label="Back Button"
+                    data-preview="true">
+              <option value="stok"
+                      data-price="0"
+                      data-image-src="https://i.postimg.cc/KvNwFsmZ/savas-kunduzu-stok.jpg"
+                      data-desc="Arka kabuk stok haliyle kalır, ek makro buton eklenmez.">
+                Stok arka kapak kalsın (+0 TL)
+              </option>
+              <option value="v2"
+                      data-price="2000"
+                      data-image-src="https://i.postimg.cc/RZxDmLzC/Savas-kunduzu-v2.png"
+                      data-desc="Savaş Kunduzu V2: İki arka paddle, FPS odaklı temel makro konfigürasyonu için ideal.">
+                Savaş Kunduzu V2 (+2.000 TL)
+              </option>
+              <option value="v4"
+                      data-price="2500"
+                      data-image-src="https://i.postimg.cc/gkVKV9f9/savas-kunduzu-v4.jpg"
+                      data-desc="Savaş Kunduzu V4: Dört arka paddle, gelişmiş makro ve kombine fonksiyonlar için maksimum esneklik.">
+                Savaş Kunduzu V4 (+2.500 TL)
+              </option>
+            </select>
+          </div>
+
+          <!-- 3) SOL JOYSTICK -->
+          <div class="variant-group">
+            <div class="variant-label-row">
+              <span>Sol Joystick Modülü</span>
+              <small>Hareket & Strafe</small>
+            </div>
+            <select class="variant-select"
+                    data-label="Sol Joystick"
+                    data-preview="true">
+              <option value="stok"
+                      data-price="0"
+                      data-image-src="https://i.postimg.cc/7hJ8bP6K/joystick_alps_joystick.png"
+                      data-desc="Stok ALPS joystick, standart kullanım için yeterlidir.">
+                Stok joystick (+0 TL)
+              </option>
+              <option value="ks13"
+                      data-price="1150"
+                      data-image-src="https://i.postimg.cc/NF2qLGMV/joystick_ks13pro.png"
+                      data-desc="KS13PRO TMR – daha düşük drift riski, stabil eğri ve hassas kontrol.">
+                KS13PRO TMR (+1.150 TL)
+              </option>
+              <option value="gulikit"
+                      data-price="1300"
+                      data-image-src="https://i.postimg.cc/MHf2XZTt/joystick_gulikit_TMR.png"
+                      data-desc="Gulikit TMR – manyetik sensörlü çözüm, uzun ömürlü ve sabit tepki.">
+                Gulikit TMR (+1.300 TL)
+              </option>
+            </select>
+          </div>
+
+          <!-- 4) SAĞ JOYSTICK -->
+          <div class="variant-group">
+            <div class="variant-label-row">
+              <span>Sağ Joystick Modülü</span>
+              <small>Aim & hedef alma</small>
+            </div>
+            <select class="variant-select"
+                    data-label="Sağ Joystick"
+                    data-preview="true">
+              <option value="stok"
+                      data-price="0"
+                      data-image-src="https://i.postimg.cc/7hJ8bP6K/joystick_alps_joystick.png"
+                      data-desc="Stok ALPS joystick, günlük kullanım için uygundur.">
+                Stok joystick (+0 TL)
+              </option>
+              <option value="ks13"
+                      data-price="1150"
+                      data-image-src="https://i.postimg.cc/NF2qLGMV/joystick_ks13pro.png"
+                      data-desc="KS13PRO TMR – FPS’de daha stabil aim çizgisi ve ince ayar imkanı.">
+                KS13PRO TMR (+1.150 TL)
+              </option>
+              <option value="gulikit"
+                      data-price="1300"
+                      data-image-src="https://i.postimg.cc/MHf2XZTt/joystick_gulikit_TMR.png"
+                      data-desc="Gulikit TMR – yoğun kullanımda bile drift’e dayanıklı manyetik joystick.">
+                Gulikit TMR (+1.300 TL)
+              </option>
+            </select>
+          </div>
+
+          <!-- 5) ARKA TETİKLER -->
+          <div class="variant-group">
+            <div class="variant-label-row">
+              <span>Arka Tetikleyiciler (R1 R2 L1 L2)</span>
+              <small>FPS için tetik süresi</small>
+            </div>
+            <select class="variant-select"
+                    data-label="Arka Tetik"
+                    data-preview="true">
+              <option value="stok"
+                      data-price="0"
+                      data-image-src="https://i.postimg.cc/0ywR9y3s/Stok-tetik.png"
+                      data-desc="Stok silikon tetikler, standart travel mesafesi ile gelir.">
+                Silikon stok tetikler (+0 TL)
+              </option>
+              <option value="omron"
+                      data-price="1800"
+                      data-image-src="https://i.postimg.cc/fTdDRknn/omron-clik.png"
+                      data-desc="Omron Mouse Click Gen:5 – kısa basış mesafesi, hızlı tepki, klik hissi.">
+                Omron Mouse Click Gen:5 (+1.800 TL)
+              </option>
+            </select>
+          </div>
+
+          <!-- 6) D-PAD -->
+          <div class="variant-group">
+            <div class="variant-label-row">
+              <span>D-PAD Tetikler (Ön Yüz Tuşları)</span>
+              <small>Yön & yüz tuşları</small>
+            </div>
+            <select class="variant-select"
+                    data-label="D-PAD Tetikler"
+                    data-preview="true">
+              <option value="stok"
+                      data-price="0"
+                      data-image-src="https://i.postimg.cc/d0ym4L19/D_Pad_Ön_clik.png"
+                      data-desc="Stok silikon D-PAD, yumuşak ve sessiz basış sunar.">
+                Stok silikon (+0 TL)
+              </option>
+              <option value="click"
+                      data-price="1250"
+                      data-image-src="https://i.postimg.cc/fTdDRknn/omron-clik.png"
+                      data-desc="D-PAD Mouse Click – daha net basış geri bildirimi ve hızlı girişler.">
+                D-PAD Mouse Click (+1.250 TL)
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- FİYAT & ÖZET & AKSİYON -->
+        <div class="bottom-row">
+          <div class="price-line">
+            <span class="price-label">Toplam Fiyat</span>
+            <span class="price-value" data-price-display></span>
+          </div>
+
+          <div class="summary-line" data-summary>
+            <span class="summary-label">Seçilen yapılandırma:</span>
+            <span class="summary-text"></span>
+          </div>
+
+          <div class="note">
+            Fiyatlar örnek olarak yazılmıştır. Net fiyat, stok durumu ve termin süresi için lütfen WhatsApp üzerinden iletişime geçin.
+          </div>
+          <div class="action-row">
+            <button class="wa-button">
+              <span class="wa-icon">💬</span> WhatsApp’tan Teklif Al
+            </button>
+            <button class="ghost-button">
+              PDF / Teklif çıktısı (yakında)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const WHATSAPP_NUMBER = "905457352897";
+
+    function formatPrice(price) {
+      return price.toLocaleString("tr-TR", {
+        style: "currency",
+        currency: "TRY",
+        maximumFractionDigits: 0
+      });
+    }
+
+    function updateSummary(card) {
+      const summaryEl = card.querySelector("[data-summary] .summary-text");
+      if (!summaryEl) return;
+
+      const parts = [];
+
+      const selects = card.querySelectorAll(".variant-select");
+      selects.forEach(sel => {
+        const label = sel.dataset.label || "Seçenek";
+        const opt = sel.selectedOptions[0];
+        if (!opt) return;
+        const val = opt.textContent.trim();
+        parts.push(label + ": " + val);
+      });
+
+      summaryEl.textContent = " " + parts.join(" · ");
+    }
+
+    function updateCardPrice(card) {
+      const base = Number(card.dataset.basePrice) || 0;
+      let extra = 0;
+
+      const selects = card.querySelectorAll(".variant-select");
+      selects.forEach(sel => {
+        const opt = sel.selectedOptions[0];
+        if (!opt) return;
+        extra += Number(opt.dataset.price || 0);
+      });
+
+      const total = base + extra;
+      card.dataset.totalPrice = total;
+
+      const display = card.querySelector("[data-price-display]");
+      if (display) {
+        display.textContent = formatPrice(total);
+      }
+
+      updateSummary(card);
+    }
+
+    function updateVariantPreviewFromSelect(card, selectEl) {
+      if (!selectEl.dataset.preview) return;
+
+      const opt = selectEl.selectedOptions[0];
+      if (!opt) return;
+
+      const imgEl = card.querySelector("[data-variant-preview-image]");
+      const titleEl = card.querySelector("[data-variant-preview-title]");
+      const descEl = card.querySelector("[data-variant-preview-desc]");
+
+      const label = selectEl.dataset.label || "Seçenek";
+      const text = opt.textContent.trim();
+      const imgSrc = opt.dataset.imageSrc;
+      const desc = opt.dataset.desc || "";
+
+      if (titleEl) {
+        titleEl.textContent = label + " → " + text;
+      }
+      if (descEl) {
+        descEl.textContent = desc || "Bu varyant için detay açıklama henüz eklenmedi.";
+      }
+      if (imgEl && imgSrc) {
+        imgEl.src = imgSrc;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const cards = document.querySelectorAll(".product-card");
+
+      cards.forEach(card => {
+        // İlk fiyat ve özet
+        updateCardPrice(card);
+
+        // İlk önizleme için her select'e bir kez tetikleyelim (özellikle ilkini)
+        const selects = card.querySelectorAll(".variant-select");
+        selects.forEach((sel, index) => {
+          if (index === 0) {
+            updateVariantPreviewFromSelect(card, sel);
+          }
+          sel.addEventListener("change", () => {
+            updateCardPrice(card);
+            updateVariantPreviewFromSelect(card, sel);
+          });
+        });
+
+        // WhatsApp butonu
+        const waBtn = card.querySelector(".wa-button");
+        if (waBtn) {
+          waBtn.addEventListener("click", () => {
+            const titleEl = card.querySelector(".product-title");
+            const productName = titleEl ? titleEl.textContent.trim() : "Ürün";
+            const total = Number(card.dataset.totalPrice || 0);
+
+            const lines = [];
+            lines.push("Merhaba, şu ürün için fiyat / stok bilgisi almak istiyorum:");
+            lines.push(productName);
+            lines.push("");
+            lines.push("Seçtiğim varyantlar:");
+
+            const selects = card.querySelectorAll(".variant-select");
+            selects.forEach(sel => {
+              const label = sel.dataset.label || "Seçenek";
+              const opt = sel.selectedOptions[0];
+              const val = opt ? opt.textContent.trim() : "";
+              lines.push("- " + label + ": " + val);
+            });
+
+            lines.push("");
+            lines.push("Sitede görünen toplam fiyat: " + formatPrice(total));
+
+            const message = encodeURIComponent(lines.join("\n"));
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+            window.open(url, "_blank");
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
